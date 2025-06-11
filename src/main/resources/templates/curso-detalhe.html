@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR" th:replace="layout :: section">
+<section>
+    <h2 class="text-2xl font-bold mb-4" th:text="'Curso: ' + ${curso.name}">Curso: Nome</h2>
+
+    <form th:action="@{'/web/cursos/' + ${curso.id} + '/editar'}" th:object="${curso}" method="post" class="max-w-lg">
+        <div class="mb-4">
+            <label class="block mb-1 font-semibold" for="name">Nome</label>
+            <input type="text" id="name" th:field="*{name}" class="w-full border rounded px-3 py-2" required />
+        </div>
+
+        <div class="mb-4">
+            <label class="block mb-1 font-semibold" for="category">Categoria</label>
+            <input type="text" id="category" th:field="*{category}" class="w-full border rounded px-3 py-2" />
+        </div>
+
+        <div class="mb-4">
+            <label class="block mb-1 font-semibold" for="professor">Professor</label>
+            <input type="text" id="professor" th:field="*{professor}" class="w-full border rounded px-3 py-2" />
+        </div>
+
+        <div class="mb-4">
+            <label class="inline-flex items-center">
+                <input type="checkbox" th:field="*{active}" class="mr-2" />
+                Ativo
+            </label>
+        </div>
+
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Salvar</button>
+        <a href="/web/cursos" class="ml-4 text-gray-600 hover:underline">Voltar</a>
+    </form>
+
+    <form th:action="@{'/web/cursos/' + ${curso.id} + '/deletar'}" method="post" class="mt-4">
+        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                onclick="return confirm('Tem certeza que deseja excluir este curso?');">
+            Excluir Curso
+        </button>
+    </form>
+</section>
+</html>
