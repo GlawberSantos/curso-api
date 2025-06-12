@@ -1,4 +1,3 @@
-
 # Imagem base com Java 17
 FROM openjdk:17-jdk-slim
 
