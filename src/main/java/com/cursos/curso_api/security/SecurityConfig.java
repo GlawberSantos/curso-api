@@ -40,8 +40,7 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/login?logout")
                 .permitAll()
             )
-            .csrf(csrf -> csrf.disable()); // Remova em produção
-
+            .csrf(csrf -> csrf.disable());
         return http.build();
     }
 }

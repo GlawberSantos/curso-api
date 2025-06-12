@@ -1,6 +1,6 @@
 
 # Imagem base com Java 17
-FROM eclipse-temurin:17-jdk-alpine
+FROM openjdk:17-jdk-slim
 
 # Argumento para versão da aplicação
 ARG JAR_FILE=target/*.jar

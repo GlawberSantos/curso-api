@@ -1,31 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR" th:replace="layout :: section">
-<section>
-    <h2 class="text-2xl font-bold mb-4">Cursos</h2>
-
-    <div class="mb-4">
-        <a href="/web/cursos/novo" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Novo Curso</a>
-    </div>
-
-    <table class="min-w-full bg-white rounded shadow">
-        <thead>
-            <tr>
-                <th class="py-2 px-4 border-b">Nome</th>
-                <th class="py-2 px-4 border-b">Categoria</th>
-                <th class="py-2 px-4 border-b">Professor</th>
-                <th class="py-2 px-4 border-b">Ativo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="curso : ${cursos}" class="hover:bg-gray-100 cursor-pointer">
-                <td class="py-2 px-4 border-b text-blue-600 hover:underline">
-                    <a th:href="@{'/web/cursos/' + ${curso.id}}" th:text="${curso.name}">Nome do Curso</a>
-                </td>
-                <td class="py-2 px-4 border-b" th:text="${curso.category}">Categoria</td>
-                <td class="py-2 px-4 border-b" th:text="${curso.professor}">Professor</td>
-                <td class="py-2 px-4 border-b" th:text="${curso.active} ? 'Sim' : 'Não'">Ativo</td>
-            </tr>
-        </tbody>
-    </table>
-</section>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: content(~{::body}, 'Lista de Cursos')}">
+<body>
+    <h1>Lista de Cursos</h1>
+    <a th:href="@{/web/cursos/novo}" class="btn btn-primary">Novo Curso</a>
+    <ul>
+        <li th:each="curso : ${cursos}">
+            <a th:href="@{/web/cursos/{id}(id=${curso.id})}" th:text="${curso.name}">Curso</a>
+        </li>
+    </ul>
+</body>
 </html>
