@@ -1,19 +1,38 @@
 version: '3.8'
+
 services:
-  curso-api:
-    image: curso-api
+  app:
     build: .
     ports:
       - "8080:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=local
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/edicao_cursos
+      - SPRING_DATASOURCE_USERNAME=edicao_cursos_user
+      - SPRING_DATASOURCE_PASSWORD=ZJLs821Ns1EARL0qAtTXENqI2ASFmqk
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - postgres-db
+    networks:
+      - curso-network
+
   postgres-db:
-    image: postgres:16
+    image: postgres:15
     environment:
-      - POSTGRES_USER=edicao_cursos_user
-      - POSTGRES_PASSWORD=ZJLs821sNs1EARL0qAtXENqI2ASFmqk
       - POSTGRES_DB=edicao_cursos
+      - POSTGRES_USER=edicao_cursos_user
+      - POSTGRES_PASSWORD=ZJLs821Ns1EARL0qAtTXENqI2ASFmqk
     ports:
       - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - curso-network
+
+networks:
+  curso-network:
+    driver: bridge
+
+volumes:
+  pgdata:
